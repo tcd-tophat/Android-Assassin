@@ -12,13 +12,14 @@ public class SignInActivity extends Activity {
 	
 	private int authToken = 0;
 
-	Facebook facebook = new Facebook("APP_ID");
+	Facebook facebook = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 		//Facebook Login
+		facebook = new Facebook("APP_ID");
 		facebook.authorize(this, new DialogListener() {
 		 	@Override
 			public void onComplete(Bundle values) {}
@@ -48,7 +49,10 @@ public class SignInActivity extends Activity {
     		startActivity(signInIntent);
     	}
     	else{
-    		if(signIn()){
+			if(facebook != null){
+				facebook.extendAccessTokenIfNeeded(this, null);
+			}
+    		else if(signIn()){
     			//Player has been signed in
     		}
     		else{
@@ -65,7 +69,7 @@ public class SignInActivity extends Activity {
     }
     
     public boolean signIn(){
-    /*Sign in the player and set suthToken */
+    /*Sign in the player and set authToken */
     	authToken = 1;
     	return true;
     }
