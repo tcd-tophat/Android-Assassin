@@ -17,8 +17,8 @@ public class SignInActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);a
-
+        setContentView(R.layout.main);
+		//Facebook Login
 		facebook.authorize(this, new DialogListener() {
 		 	@Override
 			public void onComplete(Bundle values) {}
