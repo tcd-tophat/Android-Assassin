@@ -1,6 +1,7 @@
 package org.tophat.assassin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class AssassinActivity extends Activity {
@@ -9,6 +10,10 @@ public class AssassinActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        
+    	Intent signInIntent = new Intent(this, SignInActivity.class);
+    	startActivity(signInIntent);
     }
 	public void onStart(){
 		super.onStart();
