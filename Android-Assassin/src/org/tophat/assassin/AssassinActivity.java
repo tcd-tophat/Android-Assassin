@@ -15,4 +15,10 @@ public class AssassinActivity extends Activity {
     	Intent signInIntent = new Intent(this, SignInActivity.class);
     	startActivity(signInIntent);
     }
+	public void onStart(){
+		super.onStart();
+
+		Intent signInIntent = new Intent(this, SignInActivity.class);
+		startActivity(signInIntent);
+	}
 }
