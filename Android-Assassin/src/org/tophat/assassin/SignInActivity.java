@@ -19,7 +19,7 @@ public class SignInActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);a
 
-		 facebook.authorize(this, new DialogListener() {
+		facebook.authorize(this, new DialogListener() {
 		 	@Override
 			public void onComplete(Bundle values) {}
 	   
@@ -57,7 +57,7 @@ public class SignInActivity extends Activity {
     }
     
     public boolean isSignedIn(){
-    	if(authToken != 0){
+    	if(authToken != 0 || facebook.isSessionValid()){
     		return true;
     	}
     	return false;
