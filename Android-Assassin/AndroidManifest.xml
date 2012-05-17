@@ -18,12 +18,7 @@
                   android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
     </application>
-<<<<<<< HEAD
 
 	<uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
-=======
-        
-</manifest>
->>>>>>> 8a68e6007591e3014ba9d8becf185fd19990d604
