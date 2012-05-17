@@ -4,15 +4,34 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.facebook.android.*;
+import com.facebook.android.Facebook.*;
+
 /* Handle all signing in work */
 public class SignInActivity extends Activity {
 	
 	private int authToken = 0;
+
+	Facebook facebook = new Facebook("APP_ID");
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.main);a
+
+		 facebook.authorize(this, new DialogListener() {
+		 	@Override
+			public void onComplete(Bundle values) {}
+	   
+	   		@Override
+			public void onFacebookError(FacebookError error) {}
+			
+			@Override
+			public void onError(DialogError e) {}
+			
+			@Override
+			public void onCancel() {}
+		});
     }
     
     @Override
@@ -49,4 +68,10 @@ public class SignInActivity extends Activity {
     	authToken = 1;
     	return true;
     }
+
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+		
+		facebook.authorizeCallback(requestCode, resultCode, data);
+	}
 }
