@@ -1,4 +1,4 @@
-package org.tophat.QRzar.networking;
+package org.tophat.assassin.networking;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
