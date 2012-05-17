@@ -13,9 +13,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+		<activity android:name=".SignInActivity"
+                  android:label="@string/app_name"
+                  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
     </application>
+<<<<<<< HEAD
 
 	<uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
+=======
+        
+</manifest>
+>>>>>>> 8a68e6007591e3014ba9d8becf185fd19990d604
