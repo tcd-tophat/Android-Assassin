@@ -3,6 +3,7 @@ package org.tophat.assassin;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.facebook.android.*;
 import com.facebook.android.Facebook.*;
@@ -12,45 +13,65 @@ public class SignInActivity extends Activity {
 	
 	private int authToken = 1;     //Facebook store their own auth token
 
+	
+	private static final String FACEBOOK_APP_ID = "385044381546657";
+	
 	Facebook facebook = null;
 	
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
 		
         setContentView(R.layout.login);
     }
     
     @Override
-    public void onStart(){
+    public void onStart()
+    {
 		super.onStart();
     }
     
     @Override
+<<<<<<< HEAD
     public void onResume(){
 	    super.onResume();
 		if(isSignedIn()){		//If the player already has an auth token
 			Intent signInIntent = new Intent(this, AssassinActivity.class);
+=======
+    public void onResume()
+    {
+		super.onResume();
+		
+		if(isSignedIn()) //If the player already has an auth token
+		{		
+			Intent signInIntent = new Intent(this, AssassinMenu.class);
+>>>>>>> c52bd4a5d9b417a71e5e371359076cb1ff8f7a4a
 			startActivity(signInIntent);
 		}
 		//Show login options and wait for input
     }
     
-    public boolean isSignedIn(){
-		if(authToken != 0 || (facebook != null && facebook.isSessionValid())){
+    public boolean isSignedIn()
+    {
+		if(authToken != 0 || (facebook != null && facebook.isSessionValid()))
+		{
 			return true;
 		}
 		return false;
     }
     
-    public boolean signIn(){
-    /*Sign in the player using the TopHat system and set authToken */
+    public boolean signIn()
+    {
+    	/*Sign in the player using the TopHat system and set authToken */
 		authToken = 1;
 		return true;
     }
 
-	public void facebookButtonHandler(){
-		if(facebookLogin()){
+	public void facebookButtonHandler(View v)
+	{
+		if(facebookLogin())
+		{
 			Intent signInIntent = new Intent(this, AssassinActivity.class);
 			startActivity(signInIntent);
 		}
@@ -58,10 +79,19 @@ public class SignInActivity extends Activity {
 			//Error
 		}
 	}
+<<<<<<< HEAD
     public boolean facebookLogin(){
         if(facebook == null){
 			facebook = new Facebook("APP_ID"); //TODO Add our APP_ID
+=======
+    public boolean facebookLogin()
+    {
+		if(facebook == null)
+		{
+			facebook = new Facebook(FACEBOOK_APP_ID);
+>>>>>>> c52bd4a5d9b417a71e5e371359076cb1ff8f7a4a
 		}
+		
 		/* Authorize facebook with SSO or showing a webview */
 		facebook.authorize(this, new DialogListener() {
 			@Override
@@ -76,6 +106,7 @@ public class SignInActivity extends Activity {
 			@Override
 			public void onCancel() {}
 		});
+		
 		return facebook.isSessionValid();
 	}
     
@@ -83,10 +114,12 @@ public class SignInActivity extends Activity {
         return authToken;
     }
 
-	public void onActivityResult(int requestCode, int resultCode, Intent data){
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if(facebook != null){
+		if(facebook != null)
+		{
 			facebook.authorizeCallback(requestCode, resultCode, data);
 		}
 	}
