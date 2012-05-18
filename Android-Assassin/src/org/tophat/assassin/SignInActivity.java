@@ -49,6 +49,15 @@ public class SignInActivity extends Activity {
 		return true;
     }
 
+	public void facebookButtonHandler(){
+		if(facebookLogin()){
+			Intent signInIntent = new Intent(this, AssassinActivity.class);
+			startActivity(signInIntent);
+		}
+		else{
+			//Error
+		}
+	}
     public boolean facebookLogin(){
 		if(facebook == null){
 			facebook = new Facebook("APP_ID"); //TODO Add our APP_ID
