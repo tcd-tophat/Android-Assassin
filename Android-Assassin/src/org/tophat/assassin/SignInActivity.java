@@ -28,7 +28,7 @@ public class SignInActivity extends Activity {
     
     @Override
     public void onResume(){
-		super.onResume();
+	    super.onResume();
 		if(isSignedIn()){		//If the player already has an auth token
 			Intent signInIntent = new Intent(this, AssassinActivity.class);
 			startActivity(signInIntent);
@@ -59,7 +59,7 @@ public class SignInActivity extends Activity {
 		}
 	}
     public boolean facebookLogin(){
-		if(facebook == null){
+        if(facebook == null){
 			facebook = new Facebook("APP_ID"); //TODO Add our APP_ID
 		}
 		/* Authorize facebook with SSO or showing a webview */
@@ -78,7 +78,10 @@ public class SignInActivity extends Activity {
 		});
 		return facebook.isSessionValid();
 	}
-
+    
+    public int getAuthToken(){
+        return authToken;
+    }
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
 
