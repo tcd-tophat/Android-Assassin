@@ -23,42 +23,42 @@ public class SignInActivity extends Activity {
     
     @Override
     public void onStart(){
-    	super.onStart();
+		super.onStart();
     }
     
     @Override
     public void onResume(){
-    	super.onResume();
-    	if(isSignedIn()){		//If the player already has an auth token
-    		Intent signInIntent = new Intent(this, AssassinActivity.class);
-    		startActivity(signInIntent);
-    	}
+		super.onResume();
+		if(isSignedIn()){		//If the player already has an auth token
+			Intent signInIntent = new Intent(this, AssassinActivity.class);
+			startActivity(signInIntent);
+		}
 		//Show login options and wait for input
     }
     
     public boolean isSignedIn(){
-    	if(authToken != 0 || (facebook != null && facebook.isSessionValid())){
-    		return true;
-    	}
-    	return false;
+		if(authToken != 0 || (facebook != null && facebook.isSessionValid())){
+			return true;
+		}
+		return false;
     }
     
     public boolean signIn(){
     /*Sign in the player using the TopHat system and set authToken */
-    	authToken = 1;
-    	return true;
+		authToken = 1;
+		return true;
     }
 
-	public boolean facebookLogin(){
+    public boolean facebookLogin(){
 		if(facebook == null){
 			facebook = new Facebook("APP_ID"); //TODO Add our APP_ID
 		}
 		/* Authorize facebook with SSO or showing a webview */
 		facebook.authorize(this, new DialogListener() {
-		 	@Override
+			@Override
 			public void onComplete(Bundle values) {}
 	   
-	   		@Override
+			@Override
 			public void onFacebookError(FacebookError error) {}
 			
 			@Override
