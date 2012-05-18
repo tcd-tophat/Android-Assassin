@@ -10,7 +10,7 @@ import com.facebook.android.Facebook.*;
 /* Handle all signing in work */
 public class SignInActivity extends Activity {
 	
-	private int authToken = 0;     //Facebook store their own auth token
+	private int authToken = 1;     //Facebook store their own auth token
 
 	Facebook facebook = null;
 	
@@ -82,6 +82,7 @@ public class SignInActivity extends Activity {
     public int getAuthToken(){
         return authToken;
     }
+
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
 
