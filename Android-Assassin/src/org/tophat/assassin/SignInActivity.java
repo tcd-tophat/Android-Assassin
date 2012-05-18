@@ -10,7 +10,7 @@ import com.facebook.android.Facebook.*;
 /* Handle all signing in work */
 public class SignInActivity extends Activity {
 	
-	private int authToken = 0;
+	private int authToken = 0;     //Facebook store their own auth token
 
 	Facebook facebook = null;
 	
@@ -48,7 +48,7 @@ public class SignInActivity extends Activity {
     }
     
     public boolean isSignedIn(){
-    	if(authToken != 0 || facebook.isSessionValid()){
+    	if(authToken != 0 || (facebook != null && facebook.isSessionValid())){
     		return true;
     	}
     	return false;
@@ -60,9 +60,9 @@ public class SignInActivity extends Activity {
     	return true;
     }
 
-	public void facebookLogin(){
+	public boolean facebookLogin(){
 		if(facebook == null){
-			facebook = new Facebook("APP_ID");
+			facebook = new Facebook("APP_ID"); //TODO Add our APP_ID
 		}
 		facebook.authorize(this, new DialogListener() {
 		 	@Override
@@ -77,5 +77,6 @@ public class SignInActivity extends Activity {
 			@Override
 			public void onCancel() {}
 		});
+		return facebook.ieSessionValid();
 	}
 }
