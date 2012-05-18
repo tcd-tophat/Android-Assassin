@@ -33,12 +33,10 @@ public class SignInActivity extends Activity {
     }
     
     @Override
-<<<<<<< HEAD
     public void onResume(){
 	    super.onResume();
 		if(isSignedIn()){		//If the player already has an auth token
 			Intent signInIntent = new Intent(this, AssassinActivity.class);
-=======
     public void onResume()
     {
 		super.onResume();
@@ -46,7 +44,6 @@ public class SignInActivity extends Activity {
 		if(isSignedIn()) //If the player already has an auth token
 		{		
 			Intent signInIntent = new Intent(this, AssassinMenu.class);
->>>>>>> c52bd4a5d9b417a71e5e371359076cb1ff8f7a4a
 			startActivity(signInIntent);
 		}
 		//Show login options and wait for input
@@ -79,17 +76,12 @@ public class SignInActivity extends Activity {
 			//Error
 		}
 	}
-<<<<<<< HEAD
-    public boolean facebookLogin(){
-        if(facebook == null){
-			facebook = new Facebook("APP_ID"); //TODO Add our APP_ID
-=======
+    
     public boolean facebookLogin()
     {
 		if(facebook == null)
 		{
 			facebook = new Facebook(FACEBOOK_APP_ID);
->>>>>>> c52bd4a5d9b417a71e5e371359076cb1ff8f7a4a
 		}
 		
 		/* Authorize facebook with SSO or showing a webview */
