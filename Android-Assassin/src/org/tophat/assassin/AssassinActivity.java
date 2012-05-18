@@ -10,13 +10,14 @@ public class AssassinActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        
-    	Intent signInIntent = new Intent(this, SignInActivity.class);
-    	startActivity(signInIntent);
     }
+	@Override
 	public void onStart(){
 		super.onStart();
+	}
+	@Override
+	public void onResume(){
+		super.onResume();
 
 		Intent signInIntent = new Intent(this, SignInActivity.class);
 		startActivity(signInIntent);
