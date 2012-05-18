@@ -18,21 +18,7 @@ public class SignInActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-		//Facebook Login
-		facebook = new Facebook("APP_ID");
-		facebook.authorize(this, new DialogListener() {
-		 	@Override
-			public void onComplete(Bundle values) {}
-	   
-	   		@Override
-			public void onFacebookError(FacebookError error) {}
-			
-			@Override
-			public void onError(DialogError e) {}
-			
-			@Override
-			public void onCancel() {}
-		});
+		
         setContentView(R.layout.login);
     }
     
@@ -74,9 +60,22 @@ public class SignInActivity extends Activity {
     	return true;
     }
 
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-		
-		facebook.authorizeCallback(requestCode, resultCode, data);
+	public void facebookLogin(){
+		if(facebook == null){
+			facebook = new Facebook("APP_ID");
+		}
+		facebook.authorize(this, new DialogListener() {
+		 	@Override
+			public void onComplete(Bundle values) {}
+	   
+	   		@Override
+			public void onFacebookError(FacebookError error) {}
+			
+			@Override
+			public void onError(DialogError e) {}
+			
+			@Override
+			public void onCancel() {}
+		});
 	}
 }
