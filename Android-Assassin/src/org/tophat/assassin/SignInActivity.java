@@ -17,7 +17,6 @@ public class SignInActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
 		
         setContentView(R.layout.login);
     }
@@ -34,17 +33,7 @@ public class SignInActivity extends Activity {
     		Intent signInIntent = new Intent(this, AssassinActivity.class);
     		startActivity(signInIntent);
     	}
-    	else{
-			if(facebook != null){
-				facebook.extendAccessTokenIfNeeded(this, null);
-			}
-    		else if(signIn()){
-    			//Player has been signed in
-    		}
-    		else{
-    			//Handle login errors
-    		}
-    	}
+		//Show login options and wait for input
     }
     
     public boolean isSignedIn(){
@@ -55,7 +44,7 @@ public class SignInActivity extends Activity {
     }
     
     public boolean signIn(){
-    /*Sign in the player and set authToken */
+    /*Sign in the player using the TopHat system and set authToken */
     	authToken = 1;
     	return true;
     }
@@ -64,6 +53,7 @@ public class SignInActivity extends Activity {
 		if(facebook == null){
 			facebook = new Facebook("APP_ID"); //TODO Add our APP_ID
 		}
+		/* Authorize facebook with SSO or showing a webview */
 		facebook.authorize(this, new DialogListener() {
 		 	@Override
 			public void onComplete(Bundle values) {}
@@ -77,7 +67,7 @@ public class SignInActivity extends Activity {
 			@Override
 			public void onCancel() {}
 		});
-		return facebook.ieSessionValid();
+		return facebook.isSessionValid();
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
