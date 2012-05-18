@@ -79,4 +79,12 @@ public class SignInActivity extends Activity {
 		});
 		return facebook.ieSessionValid();
 	}
+
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if(facebook != null){
+			facebook.authorizeCallback(requestCode, resultCode, data);
+		}
+	}
 }
