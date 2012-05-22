@@ -11,7 +11,7 @@ import com.facebook.android.Facebook.*;
 /* Handle all signing in work */
 public class SignInActivity extends Activity {
 	
-	private int authToken = 0;     //Facebook store their own auth token
+	private int authToken = 1;     //Facebook store their own auth token
 
 	
 	private static final String FACEBOOK_APP_ID = "385044381546657";
@@ -32,7 +32,6 @@ public class SignInActivity extends Activity {
 		super.onStart();
     }
     
-    @Override
     public void onResume()
     {
 		super.onResume();
@@ -73,7 +72,7 @@ public class SignInActivity extends Activity {
 			//Error
 		}
 	}
-	
+
 	/**
 	 * The alternate to Facebook signin system.
 	 * @param v
@@ -82,7 +81,7 @@ public class SignInActivity extends Activity {
 	{
 		AssassinActivity.parser.sendString("jsontest");
 	}
-	
+
     public boolean facebookLogin()
     {
 		if(facebook == null)
@@ -107,6 +106,10 @@ public class SignInActivity extends Activity {
 		
 		return facebook.isSessionValid();
 	}
+    
+    public int getAuthToken(){
+        return authToken;
+    }
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
