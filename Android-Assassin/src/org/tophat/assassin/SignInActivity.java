@@ -58,6 +58,7 @@ public class SignInActivity extends Activity {
     {
     	/*Sign in the player using the TopHat system and set authToken */
 		authToken = 1;
+		
 		return true;
     }
 
@@ -72,6 +73,16 @@ public class SignInActivity extends Activity {
 			//Error
 		}
 	}
+	
+	/**
+	 * The alternate to Facebook signin system.
+	 * @param v
+	 */
+	public void vanillaLoginHandler(View v)
+	{
+		AssassinActivity.parser.sendString("jsontest");
+	}
+	
     public boolean facebookLogin()
     {
 		if(facebook == null)
