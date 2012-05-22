@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
-import org.tophat.assassin.networking.HTTPParser;
-import org.tophat.assassin.networking.TCPStream;
+import org.tophat.assassin.networking.APICommunicator;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 public class AssassinActivity extends Activity 
 {
 	
-	public static HTTPParser parser;
+	public static APICommunicator apic;
 	
 	public static Context c;
 	
@@ -25,26 +24,30 @@ public class AssassinActivity extends Activity
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        //setContentView(R.layout.main);
      
-        parser = new HTTPParser();
+        //parser = new HTTPParser();
         
         c = this.getApplicationContext();
+        
+        apic = new APICommunicator(this);
+        
+        apic.jsontest();
     }
     
 	@Override
 	public void onStart()
 	{
 		super.onStart();
+		
+		Intent signInIntent = new Intent(this, SignInActivity.class);
+		startActivity(signInIntent);
 	}
 	
 	@Override
 	public void onResume()
 	{
 		super.onResume();
-
-		Intent signInIntent = new Intent(this, SignInActivity.class);
-		startActivity(signInIntent);
 	}
 	
 	/**

@@ -5,18 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.facebook.android.*;
-import com.facebook.android.Facebook.*;
+/*import com.facebook.android.*;
+import com.facebook.android.Facebook.*;*/
 
 /* Handle all signing in work */
 public class SignInActivity extends Activity {
 	
-	private int authToken = 1;     //Facebook store their own auth token
-
+	private int authToken;     //Facebook store their own auth token
 	
-	private static final String FACEBOOK_APP_ID = "385044381546657";
-	
-	Facebook facebook = null;
+	//Facebook facebook = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -24,6 +21,10 @@ public class SignInActivity extends Activity {
         super.onCreate(savedInstanceState);
 		
         setContentView(R.layout.login);
+        
+        authToken = 0;
+        
+        //facebook = new Facebook( Constants.FACEBOOK_APP_ID );
     }
     
     @Override
@@ -36,20 +37,21 @@ public class SignInActivity extends Activity {
     {
 		super.onResume();
 		
-		if(isSignedIn()) //If the player already has an auth token
+		/*if(isSignedIn()) //If the player already has an auth token
 		{		
 			Intent signInIntent = new Intent(this, AssassinMenu.class);
 			startActivity(signInIntent);
-		}
+		}*/
 		//Show login options and wait for input
     }
     
     public boolean isSignedIn()
     {
-		if(authToken != 0 || (facebook != null && facebook.isSessionValid()))
+		if(authToken != 0 )
 		{
 			return true;
 		}
+		
 		return false;
     }
     
@@ -65,7 +67,7 @@ public class SignInActivity extends Activity {
 	{
 		if(facebookLogin())
 		{
-			Intent signInIntent = new Intent(this, AssassinActivity.class);
+			Intent signInIntent = new Intent(this, AssassinMenu.class);
 			startActivity(signInIntent);
 		}
 		else{
@@ -79,17 +81,13 @@ public class SignInActivity extends Activity {
 	 */
 	public void vanillaLoginHandler(View v)
 	{
-		AssassinActivity.parser.sendString("jsontest");
+		//AssassinActivity.parser.sendString("jsontest");
 	}
 
     public boolean facebookLogin()
     {
-		if(facebook == null)
-		{
-			facebook = new Facebook(FACEBOOK_APP_ID);
-		}
 		
-		/* Authorize facebook with SSO or showing a webview */
+		/*/* Authorize facebook with SSO or showing a webview 
 		facebook.authorize(this, new DialogListener() {
 			@Override
 			public void onComplete(Bundle values) {}
@@ -104,14 +102,16 @@ public class SignInActivity extends Activity {
 			public void onCancel() {}
 		});
 		
-		return facebook.isSessionValid();
+		return facebook.isSessionValid();*/
+    	
+    	return false;
 	}
     
     public int getAuthToken(){
         return authToken;
     }
 
-	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	/*public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 
@@ -119,5 +119,5 @@ public class SignInActivity extends Activity {
 		{
 			facebook.authorizeCallback(requestCode, resultCode, data);
 		}
-	}
+	}*/
 }

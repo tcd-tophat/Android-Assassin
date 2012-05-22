@@ -19,9 +19,9 @@ public class JSONParser {
 	/**
 	 * Constructor
 	 */
-	public JSONParser (HTTPParser http, CommandModel cm)
+	public JSONParser (APICommunicator apic, CommandModel cm)
 	{
-		mapper = new ObjectMapper(); // can reuse, share globally
+		//mapper = new ObjectMapper(); // can reuse, share globally
 	}
 	
 	
