@@ -81,7 +81,7 @@ public class SignInActivity extends Activity {
 	 */
 	public void vanillaLoginHandler(View v)
 	{
-		//AssassinActivity.parser.sendString("jsontest");
+		AssassinActivity.apic.jsontest();
 	}
 
     public boolean facebookLogin()

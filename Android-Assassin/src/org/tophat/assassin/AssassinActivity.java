@@ -31,8 +31,6 @@ public class AssassinActivity extends Activity
         c = this.getApplicationContext();
         
         apic = new APICommunicator(this);
-        
-        apic.jsontest();
     }
     
 	@Override

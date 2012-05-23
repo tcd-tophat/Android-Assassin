@@ -21,8 +21,34 @@ public class JSONParser {
 	 */
 	public JSONParser (APICommunicator apic, CommandModel cm)
 	{
-		//mapper = new ObjectMapper(); // can reuse, share globally
+		try
+		{
+			mapper = getMapper(); // can reuse, share globally
+		} 
+		catch ( Exception e )
+		{
+			e.printStackTrace();
+		}
 	}
+	
+	
+	private ObjectMapper getMapper()
+	{
+		if( mapper == null )
+		{
+			try
+			{
+				mapper = new ObjectMapper(); // can reuse, share globally
+			} 
+			catch ( Exception e )
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return mapper;
+	}
+	
 	
 	
 	/**
@@ -34,7 +60,7 @@ public class JSONParser {
 	{
 		try
 		{
-			return mapper.readValue(input, Map.class);
+			return getMapper().readValue(input, Map.class);
 		}
 		catch( Exception e )
 		{

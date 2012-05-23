@@ -1,5 +1,7 @@
 package org.tophat.assassin.networking;
 
+import java.util.Map;
+
 import org.tophat.assassin.AssassinActivity;
 import org.tophat.assassin.model.CommandModel;
 
@@ -29,7 +31,8 @@ public class APICommunicator {
 		this.aa = a;
 		
 		this.apis = new APIStream(this);
-		//this.json = new JSONParser(this, cm);
+		
+		this.json = new JSONParser(this, cm);
 		
 		//Prepares connection
 		this.apis.connect();
@@ -98,7 +101,25 @@ public class APICommunicator {
 	{	
 		try
 		{
-			System.err.println(apis.requestAPI(""));
+			this.setApiError("");
+			
+			String input  = apis.requestAPI("jsontest");
+			
+			if( input == null )
+			{
+				this.setApiError("The API returned invalid data or the connection failed.");
+			}
+			
+			System.out.println(input);
+			
+			Map<String, Object> mapping = json.getObjects(input);
+			
+			for( String s : mapping.keySet() )
+			{
+				System.err.println("Key 1: "+s);
+			}
+			
+			System.err.println(mapping.size());
 			
 			return null;
 		}
