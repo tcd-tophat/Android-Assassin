@@ -20,4 +20,6 @@ public class Constants
 	public static final String USER_AGENT = "org.tophat.android.PlatformClient";
 	
 	public static final String APP_VERSION = "0.1a";
+	
+	public static final int SIGNIN_ACTIVITY = 0x1001;
 }

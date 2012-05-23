@@ -1,5 +1,8 @@
 package org.tophat.assassin;
 
+import com.facebook.android.*;
+import com.facebook.android.Facebook.DialogListener;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +16,7 @@ public class SignInActivity extends Activity {
 	
 	private int authToken;     //Facebook store their own auth token
 	
-	//Facebook facebook = null;
+	Facebook facebook = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -24,7 +27,7 @@ public class SignInActivity extends Activity {
         
         authToken = 0;
         
-        //facebook = new Facebook( Constants.FACEBOOK_APP_ID );
+        facebook = new Facebook( Constants.FACEBOOK_APP_ID );
     }
     
     @Override
@@ -37,11 +40,11 @@ public class SignInActivity extends Activity {
     {
 		super.onResume();
 		
-		/*if(isSignedIn()) //If the player already has an auth token
+		if(isSignedIn()) //If the player already has an auth token
 		{		
 			Intent signInIntent = new Intent(this, AssassinMenu.class);
 			startActivity(signInIntent);
-		}*/
+		}
 		//Show login options and wait for input
     }
     
@@ -70,7 +73,8 @@ public class SignInActivity extends Activity {
 			Intent signInIntent = new Intent(this, AssassinMenu.class);
 			startActivity(signInIntent);
 		}
-		else{
+		else
+		{
 			//Error
 		}
 	}
@@ -87,7 +91,7 @@ public class SignInActivity extends Activity {
     public boolean facebookLogin()
     {
 		
-		/*/* Authorize facebook with SSO or showing a webview 
+		/* Authorize facebook with SSO or showing a webview  */
 		facebook.authorize(this, new DialogListener() {
 			@Override
 			public void onComplete(Bundle values) {}
@@ -102,16 +106,15 @@ public class SignInActivity extends Activity {
 			public void onCancel() {}
 		});
 		
-		return facebook.isSessionValid();*/
-    	
-    	return false;
+		//facebook.a
+		return facebook.isSessionValid();
 	}
     
     public int getAuthToken(){
         return authToken;
     }
 
-	/*public void onActivityResult(int requestCode, int resultCode, Intent data)
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 
@@ -119,5 +122,5 @@ public class SignInActivity extends Activity {
 		{
 			facebook.authorizeCallback(requestCode, resultCode, data);
 		}
-	}*/
+	}
 }

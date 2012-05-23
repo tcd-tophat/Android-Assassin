@@ -31,15 +31,15 @@ public class AssassinActivity extends Activity
         c = this.getApplicationContext();
         
         apic = new APICommunicator(this);
+        
+		Intent signInIntent = new Intent(this, SignInActivity.class);
+		startActivityForResult(signInIntent, Constants.SIGNIN_ACTIVITY);
     }
     
 	@Override
 	public void onStart()
 	{
 		super.onStart();
-		
-		Intent signInIntent = new Intent(this, SignInActivity.class);
-		startActivity(signInIntent);
 	}
 	
 	@Override
@@ -75,5 +75,14 @@ public class AssassinActivity extends Activity
 		}
 	}
 	
-	
+
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if( requestCode == Constants.SIGNIN_ACTIVITY )
+		{
+			finish();
+		}
+	}
 }
