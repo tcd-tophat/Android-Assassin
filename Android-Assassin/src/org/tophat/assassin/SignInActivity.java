@@ -85,7 +85,8 @@ public class SignInActivity extends Activity {
 	 */
 	public void vanillaLoginHandler(View v)
 	{
-		AssassinActivity.apic.jsontest();
+		Intent signInIntent = new Intent(this, VanillaLogin.class);
+		startActivityForResult(signInIntent, Constants.SIGNIN_ACTIVITY);
 	}
 
     public boolean facebookLogin()
