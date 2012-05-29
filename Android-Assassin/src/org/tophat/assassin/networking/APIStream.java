@@ -49,7 +49,8 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.tophat.assassin.Constants;
 
-public class APIStream {
+public class APIStream 
+{
 
 	protected APICommunicator apic;
 	
@@ -73,29 +74,23 @@ public class APIStream {
 	 * Prepares for a connection to the JSON API.
 	 */
 	public void connect() {
-		
-		//host = "https://arboroia.com/";
-		host = "https://quack.netsoc.tcd.ie/";
+
+		host = Constants.API_URL;
 		
 		HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
-
-		/*DefaultHttpClient client = getNewHttpClient();
-		
-		SchemeRegistry registry = new SchemeRegistry();
-		SSLSocketFactory socketFactory = SSLSocketFactory.getSocketFactory();
-		socketFactory.setHostnameVerifier( (X509HostnameVerifier) hostnameVerifier);
-		SingleClientConnManager mgr = new SingleClientConnManager(client.getParams(), registry);*/
-	      
+	     
+		//Get the HTTP client that ignores the SSL sockets
 		http = getNewHttpClient();
-		
-		
+	
 		HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
 		
-		HttpProtocolParams.setUserAgent(http.getParams(), Constants.USER_AGENT+ " "+ Constants.APP_VERSION);
+		HttpProtocolParams.setUserAgent( http.getParams(), Constants.USER_AGENT + " "+ Constants.APP_VERSION );
 	}
 
-	public DefaultHttpClient getNewHttpClient() {
-	    try {
+	public DefaultHttpClient getNewHttpClient() 
+	{
+	    try 
+	    {
 	        KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
 	        trustStore.load(null, null);
 
@@ -109,11 +104,13 @@ public class APIStream {
 	        SchemeRegistry registry = new SchemeRegistry();
 	        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 	        registry.register(new Scheme("https", sf, 443));
-
+	       
 	        ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
 
 	        return new DefaultHttpClient(ccm, params);
-	    } catch (Exception e) {
+	    } 
+	    catch (Exception e) 
+	    {
 	        return new DefaultHttpClient();
 	    }
 	}
@@ -195,9 +192,13 @@ public class APIStream {
 				return response;
 			}
 			
-		} catch (ClientProtocolException e) {
+		} 
+		catch (ClientProtocolException e) 
+		{
 			e.printStackTrace();
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 		
@@ -275,9 +276,12 @@ public class APIStream {
 			entity.addPart( "photos[]", new FileBody(images.get(i), "image/jpeg" ));
 		}
 		
-		try {
+		try 
+		{
 			entity.addPart("json", (ContentBody) new StringBody(text));
-		} catch (UnsupportedEncodingException e1) {
+		}
+		catch (UnsupportedEncodingException e1) 
+		{
 			e1.printStackTrace();
 		}
 		
@@ -285,15 +289,23 @@ public class APIStream {
 
 		// Here we go!
 		String response = null;
-		try {
+		
+		try 
+		{
 			response = EntityUtils.toString( client.execute( post ).getEntity(), "UTF-8" );
-		} catch (ParseException e) {
+		} 
+		catch (ParseException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ClientProtocolException e) {
+		} 
+		catch (ClientProtocolException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

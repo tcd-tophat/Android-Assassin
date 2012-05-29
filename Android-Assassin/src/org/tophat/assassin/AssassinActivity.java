@@ -24,9 +24,6 @@ public class AssassinActivity extends Activity
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.main);
-     
-        //parser = new HTTPParser();
         
         c = this.getApplicationContext();
         

@@ -5,7 +5,8 @@ import java.util.Map;
 import org.tophat.assassin.AssassinActivity;
 import org.tophat.assassin.model.CommandModel;
 
-public class APICommunicator {
+public class APICommunicator 
+{
 
 	/**
 	 * The APIStream is the lower level HTTP Communicator with the remote server
@@ -16,19 +17,27 @@ public class APICommunicator {
 	
 	protected CommandModel cm;
 	
-	protected AssassinActivity aa;
+	protected AssassinActivity launcher;
 	
 	/**
 	 * The JSONInterpreter 
 	 */
 	private String apikey;
+	
+	/**
+	 * Contains the API Error response as text, which can be accessed in order to display a meaningful message to the user.
+	 */
 	private String api_error;
 	
+	/**
+	 * 
+	 * @param a
+	 */
 	public APICommunicator(AssassinActivity a)
 	{
 		this.cm = new CommandModel();
 		
-		this.aa = a;
+		this.launcher = a;
 		
 		this.apis = new APIStream(this);
 		
@@ -36,11 +45,6 @@ public class APICommunicator {
 		
 		//Prepares connection
 		this.apis.connect();
-	}
-	
-	public AssassinActivity getLauncher()
-	{
-		return this.aa;
 	}
 	
 	/**
@@ -51,57 +55,20 @@ public class APICommunicator {
 	 */
 	public boolean login(String user, String pass, String api, String url)
 	{
-		boolean live = false;
+		return false;
+	}
+
+	/**
+	 * This JSONtest retrieves a random json string from the server in order to check if JSON parser + web retrieval is functional
+	 * @return
+	 */
+	public String jsontest()
+	{	
+		//Prepare the response (reset error codes set)
+		this.prepare();
 		
 		try
 		{
-			if(api.equals("1"))
-			{
-				live = false;
-			}
-			else
-			{
-				live = true;
-			}
-			
-			String response = apis.requestAPI("user/login/"+user+"/"+pass, live, url);
-			
-			if(!response.equals("error"))
-			{
-				/*Login loginresult = jsonint.resultLogin(response);
-			
-				if(loginresult.getResult().equals("success"))
-				{
-					this.setApikey(loginresult.getApi_key());
-					return true;
-				}
-				else
-				{
-					this.setApiError(loginresult.getError());
-					return false;
-				}*/
-				
-				return false;
-			}
-			else
-			{
-				this.setApiError("Server Connection timed out.");
-				return false;
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			this.setApiError("The API returned invalid data.");
-			return false;
-		}
-	}
-
-	public String jsontest()
-	{	
-		try
-		{
-			this.setApiError("");
 			
 			String input  = apis.requestAPI("jsontest");
 			
@@ -131,19 +98,36 @@ public class APICommunicator {
 		}
 	}
 
-	public String getApikey() {
+	public String getApikey() 
+	{
 		return apikey;
 	}
 
-	public void setApikey(String apikey) {
+	public void setApikey(String apikey) 
+	{
 		this.apikey = apikey;
 	}
 	
-	public String getApiError() {
+	public String getApiError() 
+	{
 		return this.api_error;
 	}
 
-	public void setApiError(String apierror) {
+	public AssassinActivity getLauncher()
+	{
+		return this.launcher;
+	}
+	
+	public void setApiError(String apierror) 
+	{
 		this.api_error = apierror;
+	}
+	
+	/**
+	 * This method prepares the response of the client
+	 */
+	public void prepare()
+	{
+		this.setApiError(null);
 	}
 }

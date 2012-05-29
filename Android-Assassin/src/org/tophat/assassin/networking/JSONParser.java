@@ -12,7 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Kevin
  *
  */
-public class JSONParser {
+public class JSONParser 
+{
 
 	private ObjectMapper mapper;
 	

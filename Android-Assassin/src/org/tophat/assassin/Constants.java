@@ -21,5 +21,10 @@ public class Constants
 	
 	public static final String APP_VERSION = "0.1a";
 	
+	/**
+	 * The API URL requires a trailing slash
+	 */
+	public static final String API_URL = "https://www.arboroia.com/";
+	
 	public static final int SIGNIN_ACTIVITY = 0x1001;
 }
