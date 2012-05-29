@@ -1,6 +1,5 @@
 package org.tophat.assassin.networking;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.tophat.assassin.model.CommandModel;

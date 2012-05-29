@@ -24,7 +24,7 @@ public class Constants
 	/**
 	 * The API URL requires a trailing slash
 	 */
-	public static final String API_URL = "https://www.arboroia.com/";
+	public static final String API_URL = "https://quack.netsoc.tcd.ie/";
 	
 	public static final int SIGNIN_ACTIVITY = 0x1001;
 

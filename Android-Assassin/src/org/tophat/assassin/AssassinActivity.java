@@ -25,7 +25,7 @@ public class AssassinActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         
-        c = this.getApplicationContext();
+        c = this.getBaseContext();
         
         apic = new APICommunicator(this);
         

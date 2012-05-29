@@ -1,7 +1,6 @@
 package org.tophat.assassin.networking;
 
 import java.security.KeyStore;
-import java.security.KeyStoreException;
 
 import org.apache.http.HttpVersion;
 import org.apache.http.conn.ClientConnectionManager;
@@ -17,6 +16,11 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.tophat.assassin.Constants;
 
+/**
+ * This class creates the required client depending on the users setting for a client that forces Unsigned certs to be accepted or otherwise.
+ * @author Kevin
+ *
+ */
 public class TrustHTTPClient
 {
 

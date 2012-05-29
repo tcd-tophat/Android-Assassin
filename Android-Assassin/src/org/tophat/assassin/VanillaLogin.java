@@ -9,6 +9,7 @@ import org.tophat.assassin.networking.APICommunicator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -42,6 +43,26 @@ public class VanillaLogin extends Activity
 	
 	public void loginButtonHandler( View v )
 	{	
-		AssassinActivity.apic.jsontest();
+		new CommandProcessTask().execute();
 	}
+	
+	 private class CommandProcessTask extends AsyncTask<String, Integer, String> 
+	 {
+	     protected String doInBackground(String... urls) 
+	     {
+	    	 String response = AssassinActivity.apic.jsontest();
+	    	 
+	    	 if ( response == null )
+	    	 {
+	    		 return AssassinActivity.apic.getApiError();
+	    	 }
+	    	 
+	    	 return "Successfully communicated with Server";
+	     }
+
+	     protected void onPostExecute(String result)
+	     {
+				AssassinActivity.showNotification(result);
+	     }
+	 }
 }
