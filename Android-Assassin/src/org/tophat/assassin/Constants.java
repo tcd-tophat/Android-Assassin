@@ -27,4 +27,6 @@ public class Constants
 	public static final String API_URL = "https://www.arboroia.com/";
 	
 	public static final int SIGNIN_ACTIVITY = 0x1001;
+
+	public static final boolean TRUST_UNSIGNED_SSL_CERTS = true;
 }
