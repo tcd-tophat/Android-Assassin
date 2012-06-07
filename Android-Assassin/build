@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+swig -java -package org.swig.test -outdir ./src/org/tophat/assassin/ -o ./jni/tophat_header_wrap.c ./jni/tophat_header.i
+ndk-build
+
