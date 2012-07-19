@@ -1,5 +1,6 @@
 package org.tophat.assassin.networking;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.tophat.assassin.AssassinActivity;
@@ -46,6 +47,58 @@ public class APICommunicator
 		//Prepares connection
 		this.apis.connect();
 	}
+
+	/**
+	 * Returns true when the login details are correct and the API is reachable. Otherwise returns false.
+	 * @param user
+	 * @param pass
+	 * @return
+	 */
+	public Map<String, Object> games()
+	{
+		//Prepare the response (reset error codes set)
+		this.prepare();
+		
+		try
+		{	
+			String input = apis.getHttp("games/?apitoken="+this.getApikey());
+			
+			if( input == null || input.equals("") )
+			{
+				this.setApiError("The API returned invalid data or the connection failed.");
+			}
+			
+			Map<String, Object> mapping = json.getObjects(input);
+			
+			for( String s : mapping.keySet() )
+			{
+				
+				if (s.equals("games"))
+				{
+					return (Map<String, Object>) mapping;
+				}
+				else if(s.equals("error_message"))
+				{
+					this.setApiError((String) mapping.get("error_message"));
+				}
+				else if(s.equals("error_code"))
+				{
+					if( (Integer) mapping.get("error_code") == 401)
+					{
+						if (this.getApiError() == null)
+							this.setApiError("Unauthorised");
+					}
+				}			
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			this.setApiError("The API returned invalid data.");
+			return null;
+		}
+		return null;
+	}
 	
 	/**
 	 * Returns true when the login details are correct and the API is reachable. Otherwise returns false.
@@ -53,48 +106,66 @@ public class APICommunicator
 	 * @param pass
 	 * @return
 	 */
-	public boolean login(String user, String pass, String api, String url)
+	public boolean login(String user, String pass)
 	{
-		return false;
-	}
-
-	/**
-	 * This JSONtest retrieves a random json string from the server in order to check if JSON parser + web retrieval is functional
-	 * @return
-	 */
-	public String jsontest()
-	{	
 		//Prepare the response (reset error codes set)
 		this.prepare();
 		
 		try
 		{
+			HashMap<String, String> map = new HashMap<String, String>();
 			
-			String input  = apis.requestAPI("jsontest");
+			map.put("email", user);
+			map.put("password", pass);
+			
+			String input = apis.postHTTP("apitokens/", json.toJson(map));
+			
+			System.err.println("RESPONSE: "+input);
 			
 			if( input == null )
 			{
 				this.setApiError("The API returned invalid data or the connection failed.");
 			}
 			
-			System.out.println(input);
-			
 			Map<String, Object> mapping = json.getObjects(input);
 			
 			for( String s : mapping.keySet() )
 			{
-				System.err.println("Key 1: "+s);
+				
+				if (s.equals("apitoken"))
+				{
+					this.apikey = (String) mapping.get("apitoken");
+				}
+				else if(s.equals("error_message"))
+				{
+					this.setApiError((String) mapping.get("error_message"));
+				}
+				else if(s.equals("error_code"))
+				{
+					if( (Integer) mapping.get("error_code") == 401)
+					{
+						if (this.getApiError() == null)
+							this.setApiError("Unauthorised");
+					}
+				}			
 			}
 			
-			System.err.println(mapping.size());
+			System.err.println("Token "+this.apikey);
 			
-			return null;
+			if ( this.apikey != null )
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			this.setApiError("The API returned invalid data.");
-			return null;
+			return false;
 		}
 	}
 

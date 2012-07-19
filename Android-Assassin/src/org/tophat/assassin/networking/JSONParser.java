@@ -1,9 +1,12 @@
 package org.tophat.assassin.networking;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.tophat.assassin.model.CommandModel;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -68,5 +71,23 @@ public class JSONParser
 			
 			return null;
 		}
+	}
+	
+	public String toJson(Object input)
+	{
+		try {
+			return getMapper().writeValueAsString(input);
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

@@ -12,10 +12,10 @@
 		    <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:weightSum="1" android:layout_height="wrap_content" android:layout_width="wrap_content">
 		        <LinearLayout android:id="@+id/linearLayout2" android:orientation="vertical" android:gravity="center" android:layout_height="494dp" android:weightSum="1" android:layout_width="fill_parent">
 		            <ImageView android:id="@+id/ImageView01" android:src="@drawable/assassinlogo" android:layout_weight="0.09" android:layout_width="234dp" android:layout_height="wrap_content"></ImageView>
-		            <EditText android:id="@+id/editText1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="0.10" android:inputType="textEmailAddress" android:hint="Email Address">
+		            <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="0.10" android:inputType="textEmailAddress" android:hint="Email Address" android:id="@+id/email">
 		                <requestFocus></requestFocus>
 		            </EditText>
-		            <EditText android:id="@+id/editText2" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="0.10" android:inputType="textPassword" android:hint="Secret Password"></EditText>
+		            <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="0.10" android:inputType="textPassword" android:hint="Secret Password" android:id="@+id/password"></EditText>
 		            <ImageView android:paddingBottom="40px" android:layout_width="304dp" android:layout_height="wrap_content" android:src="@drawable/login_register" android:id="@+id/imageView1" android:onClick="loginButtonHandler"></ImageView>
 		        </LinearLayout>
 		    </LinearLayout>

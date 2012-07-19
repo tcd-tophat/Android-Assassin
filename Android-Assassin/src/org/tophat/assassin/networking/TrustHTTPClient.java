@@ -50,7 +50,7 @@ public class TrustHTTPClient
 	        HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
 	
 	        SchemeRegistry registry = new SchemeRegistry();
-	        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+	        // registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 	        registry.register( new Scheme("https", SSLSocketFactory.getSocketFactory(), 443 ) );
 
 	        ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
@@ -85,7 +85,7 @@ public class TrustHTTPClient
 	        HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
 	
 	        SchemeRegistry registry = new SchemeRegistry();
-	        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+	        //registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 
 	        registry.register( new Scheme("https", sf, 443) );
 

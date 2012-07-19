@@ -17,8 +17,10 @@ import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
@@ -40,7 +42,9 @@ public class APIStream
 	protected String username;
 	protected String password;
 	protected HttpClient http;
-	protected HttpGet httpget;
+	protected HttpGet httpGet;
+	protected HttpPut httpPut;
+	protected HttpDelete httpDelete;
 	protected HttpResponse response;
 	protected HttpEntity entity;
 	protected HttpPost httppost;
@@ -71,7 +75,8 @@ public class APIStream
 
 	public DefaultHttpClient getNewHttpClient() 
 	{
-	    try 
+		return new DefaultHttpClient();
+	    /*try 
 	    {
 	    	TrustHTTPClient tc = new TrustHTTPClient();
 	    	
@@ -79,8 +84,9 @@ public class APIStream
 	    } 
 	    catch (Exception e) 
 	    {
-	        return new DefaultHttpClient();
-	    }
+	    	e.printStackTrace();
+	    	return new DefaultHttpClient();
+	    }*/
 	}
 
 	/**
@@ -88,7 +94,7 @@ public class APIStream
 	 * @param req
 	 * @return
 	 */
-	public String postAPI(String req, String[] json)
+	public String postAPI(String req, String json)
 	{
 		try
 		{
@@ -125,16 +131,7 @@ public class APIStream
 		}
 		else
 		{
-			if(live)
-			{
-				this.host = "http://api.verifiapp.com/";
-				this.live = live;
-			}
-			else
-			{
-				this.host = "http://test.api.verifiapp.com/";
-				this.live = live;
-			}	
+
 		}
 		
 		return this.requestAPI(req);
@@ -149,7 +146,7 @@ public class APIStream
 	{
 		try
 		{
-			String response = this.requestHTTP(req);
+			String response = this.getHttp(req);
 			
 			if(response==null)
 			{
@@ -174,16 +171,52 @@ public class APIStream
 	}
 	
 	/**
-	 * Requests a HTTP
+	 * Requests a HTTP get
 	 * @param req
 	 * @return
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public String requestHTTP(String req) throws ClientProtocolException, IOException
+	public String getHttp(String req) throws ClientProtocolException, IOException
 	{
-		httpget = new HttpGet(this.host+req);
-		response = http.execute(httpget);
+		httpGet = new HttpGet(this.host+req);
+		response = http.execute(httpGet);
+		entity = response.getEntity();
+		
+		
+		//Returns the API returned strings.
+		return EntityUtils.toString(entity);
+	}
+	
+	/**
+	 * Requests a HTTP Delete
+	 * @param req
+	 * @return
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
+	public String deleteHttp(String req) throws ClientProtocolException, IOException
+	{
+		httpDelete = new HttpDelete(this.host+req);
+		response = http.execute(httpDelete);
+		entity = response.getEntity();
+		
+		
+		//Returns the API returned strings.
+		return EntityUtils.toString(entity);
+	}
+	
+	/**
+	 * Requests a HTTP Put
+	 * @param req
+	 * @return
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
+	public String putHTTP(String req) throws ClientProtocolException, IOException
+	{
+		httpPut = new HttpPut(this.host+req);
+		response = http.execute(httpPut);
 		entity = response.getEntity();
 		
 		
@@ -198,30 +231,32 @@ public class APIStream
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public String postHTTP(String req, String[] post) throws ClientProtocolException, IOException
+	public String postHTTP(String req, String post) throws ClientProtocolException, IOException
 	{
 		httppost = new HttpPost(this.host+req);
 		  
         // Adding POST data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2); 
-        nameValuePairs.add(new BasicNameValuePair(post[0], post[1])); 
+        nameValuePairs.add(new BasicNameValuePair("data", post)); 
         httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs)); 
 	 
-
         // Execute HTTP Post Request
 		response = http.execute(httppost);
+		entity = response.getEntity();
 		
 		if( response.getStatusLine().getStatusCode()<300)
 		{
-			entity = response.getEntity();
 			
-			return EntityUtils.toString(entity);
+			
+			System.err.println("ENTITY RESULT ="+response.getStatusLine().getReasonPhrase());
+			
+			return EntityUtils.toString(entity).replaceAll("\\p{Cntrl}", "");
 		}
 		else
 		{
 			apic.setApiError("Error: "+response.getStatusLine().getStatusCode());
 			
-			return null;
+			return EntityUtils.toString(entity).replaceAll("\\p{Cntrl}", "");
 		}
 	}
 	
