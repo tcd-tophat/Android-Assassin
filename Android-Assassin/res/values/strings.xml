@@ -6,4 +6,8 @@
     <string name="facebook">Facebook</string>
     <string name="nofacebook">Plain Login</string>
     <color name="deep_black">#0d0e0e</color>
+    <string name="games">Games</string>
+    <string name="game">Game</string>
+    <string name="name">Name</string>
+    <string name="game_type">Game Type</string>
 </resources>

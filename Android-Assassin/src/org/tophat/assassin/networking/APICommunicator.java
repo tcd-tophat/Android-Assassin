@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.tophat.assassin.AssassinActivity;
+import org.tophat.assassin.mapping.GameList;
 import org.tophat.assassin.model.CommandModel;
 
 public class APICommunicator 
@@ -42,7 +43,7 @@ public class APICommunicator
 		
 		this.apis = new APIStream(this);
 		
-		this.json = new JSONParser(this, cm);
+		this.json = new JSONParser(this);
 		
 		//Prepares connection
 		this.apis.connect();
@@ -54,7 +55,7 @@ public class APICommunicator
 	 * @param pass
 	 * @return
 	 */
-	public Map<String, Object> games()
+	public GameList games()
 	{
 		//Prepare the response (reset error codes set)
 		this.prepare();
@@ -75,7 +76,7 @@ public class APICommunicator
 				
 				if (s.equals("games"))
 				{
-					return (Map<String, Object>) mapping;
+					return new GameList((Map<String, Object>) mapping);
 				}
 				else if(s.equals("error_message"))
 				{

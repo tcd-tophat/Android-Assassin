@@ -3,8 +3,6 @@ package org.tophat.assassin.networking;
 import java.io.IOException;
 import java.util.Map;
 
-import org.tophat.assassin.model.CommandModel;
-
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +20,7 @@ public class JSONParser
 	/**
 	 * Constructor
 	 */
-	public JSONParser (APICommunicator apic, CommandModel cm)
+	public JSONParser (APICommunicator apic)
 	{
 		try
 		{

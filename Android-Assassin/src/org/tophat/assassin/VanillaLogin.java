@@ -73,7 +73,7 @@ public class VanillaLogin extends Activity
 	    	 }
 	    	 else
 	    	 {
-				Intent menu = new Intent(vanilla, AssassinMenu.class);
+				Intent menu = new Intent(vanilla, GameMenu.class);
 				startActivityForResult(menu, Constants.MENU_ACTIVITY);
 	    	 }
 	     }

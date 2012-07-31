@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.tophat.assassin.components.ListItem;
 import org.tophat.assassin.components.QViewAdapter;
+import org.tophat.assassin.mapping.Game;
+import org.tophat.assassin.mapping.GameList;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -17,20 +19,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class AssassinMenu extends ListActivity {
+public class GameMenu extends ListActivity {
 	
     private List<? extends Map<String, ?>> data;
 	private ListView lv;
+	GameList games;
 
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        String title = "Single List Item";
-        String subtitle = "";
-        String type = "";
         
         ArrayList<Map> data = getData();
         
@@ -49,27 +48,27 @@ public class AssassinMenu extends ListActivity {
 		this.lv = getListView();
 		lv.setTextFilterEnabled(true);
 		
-		//lv.setCacheColorHint(Color.WHITE);
 		lv.setVerticalFadingEdgeEnabled(true);
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 		      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		    	  //Do Nothing
+		    	  AssassinActivity.showNotification(games.getGames().get(position).getName()); 
+		    	  Intent intent = new Intent(GameMenu.this, JoinGame.class);
+		    	  intent.putExtra("game", games.getGames().get(position));
+		    	  startActivity(intent); 
 		      }
 		});
     }
     
     public ArrayList<Map> getData()
     {
-    	Map<String, Object> games = AssassinActivity.apic.games();
+    	games = AssassinActivity.apic.games();
     	
-    	ArrayList<Map<String, Object>> gameslist = (ArrayList<Map<String, Object>>) games.get("games");
+    	ArrayList<Map> data = new ArrayList<Map>();
     	
-        ArrayList<Map> data = new ArrayList<Map>();
-        
-        for ( Map<String, Object> gamemap : gameslist )
+        for ( Game game : games.getGames() )
         {
-        	data.add((Map) new ListItem((String)gamemap.get("name"), (String)((Map)gamemap.get("creator")).get("name")+" - "+(String)((Map)gamemap.get("game_type")).get("name"), ((Integer)gamemap.get("id")).toString()));
+        	data.add((Map) new ListItem(game.getName(), game.getCreator().getName()+" - "+ game.getGameType().getName(), game.getId().toString()));
         }
         
         return data;    	

@@ -42,7 +42,7 @@ public class SignInActivity extends Activity {
 		
 		if(isSignedIn()) //If the player already has an auth token
 		{		
-			Intent signInIntent = new Intent(this, AssassinMenu.class);
+			Intent signInIntent = new Intent(this, GameMenu.class);
 			startActivity(signInIntent);
 		}
 		//Show login options and wait for input
@@ -70,7 +70,7 @@ public class SignInActivity extends Activity {
 	{
 		if(facebookLogin())
 		{
-			Intent signInIntent = new Intent(this, AssassinMenu.class);
+			Intent signInIntent = new Intent(this, GameMenu.class);
 			startActivity(signInIntent);
 		}
 		else
