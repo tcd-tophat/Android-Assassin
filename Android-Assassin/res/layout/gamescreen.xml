@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+    <TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/game"></TextView>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+        <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/name" android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&lt;% Name Placeholder %&gt;" android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/game_name_placeholder"></TextView>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">
+        <TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/game_type" android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&lt;% Name Placeholder %&gt;" android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/game_type_placeholder"></TextView>
+    </LinearLayout>
+</LinearLayout>
