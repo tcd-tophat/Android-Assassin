@@ -12,8 +12,5 @@
 	<classpathentry kind="lib" path="/Users/Kevin/tophat-android-libs/httpcomponents-client-4.2/lib/httpmime-4.2.jar"/>
 	<classpathentry kind="lib" path="/Users/Kevin/Documents/java jars/commons-lang3-3.0.1.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="/Users/Kevin/git/Android-Assassin/Android-Assassin/assets/jackson-annotations-2.0.2.jar"/>
-	<classpathentry kind="lib" path="/Users/Kevin/git/Android-Assassin/Android-Assassin/assets/jackson-core-2.0.2.jar"/>
-	<classpathentry kind="lib" path="/Users/Kevin/git/Android-Assassin/Android-Assassin/assets/jackson-databind-2.0.2.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
