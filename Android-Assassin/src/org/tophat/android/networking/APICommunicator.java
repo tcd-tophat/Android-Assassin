@@ -1,11 +1,11 @@
-package org.tophat.assassin.networking;
+package org.tophat.android.networking;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.tophat.android.mapping.GameList;
+import org.tophat.android.model.CommandModel;
 import org.tophat.assassin.AssassinActivity;
-import org.tophat.assassin.mapping.GameList;
-import org.tophat.assassin.model.CommandModel;
 
 public class APICommunicator 
 {

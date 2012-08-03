@@ -1,4 +1,4 @@
-package org.tophat.assassin.model;
+package org.tophat.android.model;
 
 import android.os.AsyncTask;
 

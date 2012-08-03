@@ -1,6 +1,6 @@
 package org.tophat.assassin;
 
-import org.tophat.assassin.mapping.Game;
+import org.tophat.android.mapping.Game;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ public class JoinGame extends Activity {
         super.onCreate(savedInstanceState);   
         setContentView(R.layout.gamescreen);
         
-
-        //Game g = getIntent().getExtras().getString("game");
+        Bundle b = getIntent().getExtras();
+		Game g = b.getParcelable("game");
         
-        ((TextView)findViewById(R.id.game_name_placeholder)).setText(""); 
+        ((TextView)findViewById(R.id.game_name_placeholder)).setText(g.getName()); 
     }
 }

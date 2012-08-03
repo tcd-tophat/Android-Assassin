@@ -1,4 +1,4 @@
-package org.tophat.assassin.mapping;
+package org.tophat.android.mapping;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -86,7 +86,38 @@ public class GameList implements Parcelable{
 			}
 		}
 	}
+	
+    /**
+    *
+    * This field is needed for Android to be able to
+    * create new objects, individually or as arrays.
+    *
+    * This also means that you can use use the default
+    * constructor to create the object and use another
+    * method to hyrdate it as necessary.
+    *
+    * I just find it easier to use the constructor.
+    * It makes sense for the way my brain thinks ;-)
+    *
+    */
+   public static final Parcelable.Creator CREATOR =
+   	new Parcelable.Creator() {
+           public GameList createFromParcel(Parcel in) {
+               return new GameList(in);
+           }
 
+           public GameList[] newArray(int size) {
+               return new GameList[size];
+           }
+       };
+
+   	public GameList(Parcel in)
+   	{
+   		this.setGames(new ArrayList<Game>());
+   		this.setMaxPerpage(null);
+   		this.setPaginationOffset(null);
+   	}
+   	
 	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub

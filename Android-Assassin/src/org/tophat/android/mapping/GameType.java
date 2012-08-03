@@ -1,4 +1,4 @@
-package org.tophat.assassin.mapping;
+package org.tophat.android.mapping;
 
 import java.util.Map;
 
@@ -12,6 +12,12 @@ public class GameType implements Parcelable {
 	private String name;
 	
 	public GameType()
+	{
+		this.setId(null);
+		this.setName(null);
+	}
+	
+	public GameType(Parcel in)
 	{
 		this.setId(null);
 		this.setName(null);
@@ -65,5 +71,29 @@ public class GameType implements Parcelable {
 		// TODO Auto-generated method stub
 		
 	}
+	
+    /**
+    *
+    * This field is needed for Android to be able to
+    * create new objects, individually or as arrays.
+    *
+    * This also means that you can use use the default
+    * constructor to create the object and use another
+    * method to hyrdate it as necessary.
+    *
+    * I just find it easier to use the constructor.
+    * It makes sense for the way my brain thinks ;-)
+    *
+    */
+   public static final Parcelable.Creator CREATOR =
+   	new Parcelable.Creator() {
+           public GameType createFromParcel(Parcel in) {
+               return new GameType(in);
+           }
+
+           public GameType[] newArray(int size) {
+               return new GameType[size];
+           }
+       };
 	
 }

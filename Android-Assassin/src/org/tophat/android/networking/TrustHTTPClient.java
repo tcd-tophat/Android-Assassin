@@ -1,4 +1,4 @@
-package org.tophat.assassin.networking;
+package org.tophat.android.networking;
 
 import java.security.KeyStore;
 

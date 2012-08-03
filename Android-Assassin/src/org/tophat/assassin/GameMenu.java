@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.tophat.android.mapping.Game;
+import org.tophat.android.mapping.GameList;
 import org.tophat.assassin.components.ListItem;
 import org.tophat.assassin.components.QViewAdapter;
-import org.tophat.assassin.mapping.Game;
-import org.tophat.assassin.mapping.GameList;
 
 import android.app.Activity;
 import android.app.ListActivity;

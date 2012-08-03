@@ -1,4 +1,4 @@
-package org.tophat.assassin.mapping;
+package org.tophat.android.mapping;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -160,4 +160,28 @@ public class Game implements Parcelable {
 		
 		dest.writeParcelableArray(objs, 0);
 	}
+	
+    /**
+    *
+    * This field is needed for Android to be able to
+    * create new objects, individually or as arrays.
+    *
+    * This also means that you can use use the default
+    * constructor to create the object and use another
+    * method to hyrdate it as necessary.
+    *
+    * I just find it easier to use the constructor.
+    * It makes sense for the way my brain thinks ;-)
+    *
+    */
+   public static final Parcelable.Creator CREATOR =
+   	new Parcelable.Creator() {
+           public Game createFromParcel(Parcel in) {
+               return new Game(in);
+           }
+
+           public Game[] newArray(int size) {
+               return new Game[size];
+           }
+       };
 }

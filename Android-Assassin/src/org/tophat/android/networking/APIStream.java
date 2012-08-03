@@ -1,4 +1,4 @@
-package org.tophat.assassin.networking;
+package org.tophat.android.networking;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,12 +48,10 @@ public class APIStream
 	protected HttpResponse response;
 	protected HttpEntity entity;
 	protected HttpPost httppost;
-	protected boolean live;
 	
 	public APIStream(APICommunicator apic)
 	{
 		this.apic = apic;
-		this.live = false;
 	}
 	
 	/**
@@ -121,17 +119,9 @@ public class APIStream
 	 */
 	public String requestAPI(String req, boolean live, String url)
 	{
-		if(url!=null)
+		if(url!=null && url!="")
 		{
-			if(url!="")
-			{
 				this.host = url;
-				this.live = true;
-			}
-		}
-		else
-		{
-
 		}
 		
 		return this.requestAPI(req);

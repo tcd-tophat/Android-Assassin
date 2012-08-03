@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
-import org.tophat.assassin.networking.APICommunicator;
+import org.tophat.android.networking.APICommunicator;
 
 import android.app.Activity;
 import android.content.Context;
