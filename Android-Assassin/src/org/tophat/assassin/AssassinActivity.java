@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
-import org.tophat.android.networking.APICommunicator;
+import org.tophat.android.networking.ApiCommunicator;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class AssassinActivity extends Activity 
 {
 	
-	public static APICommunicator apic;
+	public static ApiCommunicator apic;
 	
 	public static Context c;
 	
@@ -27,7 +27,7 @@ public class AssassinActivity extends Activity
         
         c = this.getBaseContext();
         
-        apic = new APICommunicator(this);
+        apic = new ApiCommunicator(this);
         
 		Intent signInIntent = new Intent(this, SignInActivity.class);
 		startActivityForResult(signInIntent, Constants.SIGNIN_ACTIVITY);

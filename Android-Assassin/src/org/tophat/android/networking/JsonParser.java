@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Kevin
  *
  */
-public class JSONParser 
+public class JsonParser 
 {
 
 	private ObjectMapper mapper;
@@ -20,7 +20,7 @@ public class JSONParser
 	/**
 	 * Constructor
 	 */
-	public JSONParser (APICommunicator apic)
+	public JsonParser ()
 	{
 		try
 		{

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
-import org.tophat.android.networking.APICommunicator;
+import org.tophat.android.networking.ApiCommunicator;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class VanillaLogin extends Activity 
 {
 	
-	public static APICommunicator apic;
+	public static ApiCommunicator apic;
 	
 	public static Context c;
 	
