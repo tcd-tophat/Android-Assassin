@@ -62,7 +62,8 @@ public class GameMenu extends ListActivity {
     
     public ArrayList<Map> getData()
     {
-    	games = AssassinActivity.apic.games();
+    	//games = AssassinActivity.apic.games();
+    	GameList games = new GameList();
     	
     	ArrayList<Map> data = new ArrayList<Map>();
     	

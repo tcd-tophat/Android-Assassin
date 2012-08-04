@@ -3,6 +3,10 @@ package org.tophat.android.networking;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.ParseException;
+import org.tophat.android.exceptions.BadResponse;
+import org.tophat.android.exceptions.HttpException;
+import org.tophat.android.mapping.ApiToken;
 import org.tophat.android.mapping.GameList;
 import org.tophat.assassin.AssassinActivity;
 
@@ -17,16 +21,8 @@ public class ApiCommunicator
 	protected JsonParser json;
 
 	protected AssassinActivity launcher;
-	
-	/**
-	 * The JSONInterpreter 
-	 */
-	private String apikey;
-	
-	/**
-	 * Contains the API Error response as text, which can be accessed in order to display a meaningful message to the user.
-	 */
-	private String api_error;
+
+	private ApiToken apiToken;
 	
 	/**
 	 * 
@@ -50,7 +46,7 @@ public class ApiCommunicator
 	 * @param pass
 	 * @return
 	 */
-	public GameList games()
+	/*public GameList games()
 	{
 		//Prepare the response (reset error codes set)
 		this.prepare();
@@ -94,107 +90,87 @@ public class ApiCommunicator
 			return null;
 		}
 		return null;
-	}
+	}*/
 	
 	/**
-	 * Returns true when the login details are correct and the API is reachable. Otherwise returns false.
-	 * @param user
-	 * @param pass
+	 * 
+	 * @param uri
 	 * @return
+	 * @throws HttpException
 	 */
-	public boolean login(String user, String pass)
+	public Map<String, Object> get(String uri) throws HttpException
 	{
-		//Prepare the response (reset error codes set)
-		this.prepare();
+		String input;
+		
+		if(this.getApitoken() != null )
+		{
+			input = http.get(uri+"?apitoken="+this.getApitoken().getApitoken());
+		}
+		else
+		{
+			input = http.get(uri);
+		}
+		
+		if( input == null || input.equals("") )
+		{
+			throw new BadResponse();
+		}
 		
 		try
 		{
-			HashMap<String, String> map = new HashMap<String, String>();
-			
-			map.put("email", user);
-			map.put("password", pass);
-			
-			String input = http.post("apitokens/", json.toJson(map));
-			
-			System.err.println("RESPONSE: "+input);
-			
-			if( input == null )
-			{
-				this.setApiError("The API returned invalid data or the connection failed.");
-			}
-			
-			Map<String, Object> mapping = json.getObjects(input);
-			
-			for( String s : mapping.keySet() )
-			{
-				
-				if (s.equals("apitoken"))
-				{
-					this.apikey = (String) mapping.get("apitoken");
-				}
-				else if(s.equals("error_message"))
-				{
-					this.setApiError((String) mapping.get("error_message"));
-				}
-				else if(s.equals("error_code"))
-				{
-					if( (Integer) mapping.get("error_code") == 401)
-					{
-						if (this.getApiError() == null)
-							this.setApiError("Unauthorised");
-					}
-				}			
-			}
-			
-			System.err.println("Token "+this.apikey);
-			
-			if ( this.apikey != null )
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return json.getObjects(input);
 		}
-		catch(Exception e)
+		catch(ParseException pe)
 		{
-			e.printStackTrace();
-			this.setApiError("The API returned invalid data.");
-			return false;
+			throw new BadResponse();
 		}
-	}
-
-	public String getApikey() 
-	{
-		return apikey;
-	}
-
-	public void setApikey(String apikey) 
-	{
-		this.apikey = apikey;
 	}
 	
-	public String getApiError() 
+	/**
+	 * 
+	 * @param uri
+	 * @return
+	 * @throws HttpException
+	 */
+	public Map<String, Object> post(String uri, HashMap<String, String> data) throws HttpException
 	{
-		return this.api_error;
+		String input;
+		
+		if(this.getApitoken() != null )
+		{
+			input = http.post(uri+"?apitoken="+this.getApitoken().getApitoken(), json.toJson(data));
+		}
+		else
+		{
+			input = http.post(uri, json.toJson(data));
+		}
+		
+		if( input == null || input.equals("") )
+		{
+			throw new BadResponse();
+		}
+		
+		try
+		{
+			return json.getObjects(input);
+		}
+		catch(ParseException pe)
+		{
+			throw new BadResponse();
+		}
 	}
-
+	
 	public AssassinActivity getLauncher()
 	{
 		return this.launcher;
 	}
-	
-	public void setApiError(String apierror) 
-	{
-		this.api_error = apierror;
+
+	public void setApitoken(ApiToken apiToken) {
+		this.apiToken = apiToken;
 	}
 	
-	/**
-	 * This method prepares the response of the client
-	 */
-	public void prepare()
+	public ApiToken getApitoken()
 	{
-		this.setApiError(null);
+		return this.apiToken;
 	}
 }

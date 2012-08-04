@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
+import org.tophat.android.exceptions.HttpException;
+import org.tophat.android.exceptions.NotFound;
+import org.tophat.android.exceptions.Unauthorised;
+import org.tophat.android.model.ApiTokenMapper;
 import org.tophat.android.networking.ApiCommunicator;
 
 import android.app.Activity;
@@ -53,16 +57,29 @@ public class VanillaLogin extends Activity
 	
 	 private class CommandProcessTask extends AsyncTask<String, Integer, String> 
 	 {
-	     protected String doInBackground(String... deets) 
+	     protected String doInBackground(String... details) 
 	     {
-	    	 boolean response = AssassinActivity.apic.login(deets[0], deets[1]);
-	    	 
-	    	 if ( response == false )
-	    	 {
-	    		 return AssassinActivity.apic.getApiError();
-	    	 }
-	    	 
-	    	 return "success";
+			ApiTokenMapper atm = new ApiTokenMapper(AssassinActivity.apic);
+			 
+			try 
+			{
+				AssassinActivity.apic.setApitoken(atm.getApiToken(details[0], details[1]));
+			} 
+			catch (NotFound e)
+			{
+				return "The given user was not found.";
+			} 
+			catch (Unauthorised e)
+			{
+				return "The login details given were incorrect.";
+			} 
+			catch (HttpException e) 
+			{
+				e.printStackTrace();
+				return "Error. Please check logs.";
+			}
+			 
+			return "success";
 	     }
 
 	     protected void onPostExecute(String result)
