@@ -79,19 +79,19 @@ public class VanillaLogin extends Activity
 				return "Error. Please check logs.";
 			}
 			 
-			return "success";
+			return null;
 	     }
 
-	     protected void onPostExecute(String result)
+	     protected void onPostExecute(String error)
 	     {
-	    	 if (!result.equals("success"))
-	    	 {
-				AssassinActivity.showNotification(result);
-	    	 }
-	    	 else
+	    	 if (error == null)
 	    	 {
 				Intent menu = new Intent(vanilla, GameMenu.class);
 				startActivityForResult(menu, Constants.MENU_ACTIVITY);
+	    	 }
+	    	 else
+	    	 {
+	    		AssassinActivity.showNotification(error);
 	    	 }
 	     }
 	 }
