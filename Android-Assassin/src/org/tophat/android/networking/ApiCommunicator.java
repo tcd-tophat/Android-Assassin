@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.tophat.android.mapping.GameList;
-import org.tophat.android.model.CommandModel;
 import org.tophat.assassin.AssassinActivity;
 
 public class ApiCommunicator 
@@ -13,12 +12,10 @@ public class ApiCommunicator
 	/**
 	 * The APIStream is the lower level HTTP Communicator with the remote server
 	 */
-	protected TopHatHttpClient apis;
+	protected TopHatHttpClient http;
 	
 	protected JsonParser json;
-	
-	protected CommandModel cm;
-	
+
 	protected AssassinActivity launcher;
 	
 	/**
@@ -36,17 +33,15 @@ public class ApiCommunicator
 	 * @param a
 	 */
 	public ApiCommunicator(AssassinActivity a)
-	{
-		this.cm = new CommandModel();
-		
+	{	
 		this.launcher = a;
 		
-		this.apis = new TopHatHttpClient(this);
+		this.http = new TopHatHttpClient(this);
 		
 		this.json = new JsonParser();
 		
 		//Prepares connection
-		this.apis.connect();
+		this.http.connect();
 	}
 
 	/**
@@ -62,7 +57,7 @@ public class ApiCommunicator
 		
 		try
 		{	
-			String input = apis.get("games/?apitoken="+this.getApikey());
+			String input = http.get("games/?apitoken="+this.getApikey());
 			
 			if( input == null || input.equals("") )
 			{
@@ -119,7 +114,7 @@ public class ApiCommunicator
 			map.put("email", user);
 			map.put("password", pass);
 			
-			String input = apis.post("apitokens/", json.toJson(map));
+			String input = http.post("apitokens/", json.toJson(map));
 			
 			System.err.println("RESPONSE: "+input);
 			
