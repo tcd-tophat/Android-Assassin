@@ -33,8 +33,10 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
 import org.tophat.android.exceptions.HttpException;
 import org.tophat.android.exceptions.NoInternetConnection;
+import org.tophat.android.networking.requests.TopHatDelete;
 import org.tophat.android.networking.requests.TopHatGet;
 import org.tophat.android.networking.requests.TopHatPost;
+import org.tophat.android.networking.requests.TopHatPut;
 import org.tophat.assassin.Constants;
 
 public class TopHatHttpClient 
@@ -105,28 +107,53 @@ public class TopHatHttpClient
 		}
 	}
 	
+
 	/**
-	 * Requests a HTTP Delete
-	 * @param req
+	 * 
+	 * @param url
 	 * @return
-	 * @throws ClientProtocolException
-	 * @throws IOException
+	 * @throws ParseException
+	 * @throws HttpException
 	 */
-	public String delete(String req) throws ClientProtocolException, IOException
+	public String delete(String url) throws ParseException, HttpException
 	{
-		return null;
+		try
+		{
+			return new TopHatDelete(http, this.host+url).execute();
+		} 
+		catch (ClientProtocolException e) 
+		{
+			throw new NoInternetConnection();
+		} 
+		catch (IOException e) 
+		{
+			throw new NoInternetConnection();
+		}
 	}
 	
+
 	/**
-	 * Requests a HTTP Put
-	 * @param req
+	 * 
+	 * @param url
+	 * @param json
 	 * @return
-	 * @throws ClientProtocolException
-	 * @throws IOException
+	 * @throws ParseException
+	 * @throws HttpException
 	 */
-	public String put(String req) throws ClientProtocolException, IOException
+	public String put(String url, String json) throws ParseException, HttpException
 	{
-		return null;
+		try
+		{
+			return new TopHatPut(http, this.host+url, json).execute();
+		} 
+		catch (ClientProtocolException e) 
+		{
+			throw new NoInternetConnection();
+		} 
+		catch (IOException e) 
+		{
+			throw new NoInternetConnection();
+		}
 	}
 	
 	/**
