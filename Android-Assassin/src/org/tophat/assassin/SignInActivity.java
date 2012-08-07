@@ -27,7 +27,7 @@ public class SignInActivity extends Activity {
         
         authToken = 0;
         
-        facebook = new Facebook( Constants.FACEBOOK_APP_ID );
+        facebook = new Facebook( AssassinActivity.constants.FACEBOOK_APP_ID );
     }
     
     @Override
@@ -86,7 +86,7 @@ public class SignInActivity extends Activity {
 	public void vanillaLoginHandler(View v)
 	{
 		Intent signInIntent = new Intent(this, VanillaLogin.class);
-		startActivityForResult(signInIntent, Constants.SIGNIN_ACTIVITY);
+		startActivityForResult(signInIntent, AssassinActivity.constants.SIGNIN_ACTIVITY);
 	}
 
     public boolean facebookLogin()

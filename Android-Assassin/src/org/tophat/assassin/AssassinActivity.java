@@ -18,6 +18,7 @@ public class AssassinActivity extends Activity
 	public static ApiCommunicator apic;
 	
 	public static Context c;
+	public static Constants constants;
 	
     /** Called when the activity is first created. */
     @Override
@@ -27,10 +28,12 @@ public class AssassinActivity extends Activity
         
         c = this.getBaseContext();
         
-        apic = new ApiCommunicator(this);
+        constants = new Constants();
+        
+        apic = new ApiCommunicator(constants);
         
 		Intent signInIntent = new Intent(this, SignInActivity.class);
-		startActivityForResult(signInIntent, Constants.SIGNIN_ACTIVITY);
+		startActivityForResult(signInIntent, constants.SIGNIN_ACTIVITY);
     }
     
 	@Override
@@ -77,7 +80,7 @@ public class AssassinActivity extends Activity
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if( requestCode == Constants.SIGNIN_ACTIVITY )
+		if( requestCode == constants.SIGNIN_ACTIVITY )
 		{
 			finish();
 		}

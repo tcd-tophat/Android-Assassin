@@ -1,3 +1,25 @@
 # cache for current jar dependecy. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
+1337599089000 193693 9ba85dcbe273e1e3265c8d599569a71f1b81b75b /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/jackson-core-2.0.2.jar
+1337599089000 193693 9ba85dcbe273e1e3265c8d599569a71f1b81b75b /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/jackson-core-2.0.2.jar
+1337782828000 33525 211ffb697056079e6693316b2c9bb91e348ae9c4 /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/jackson-annotations-2.0.2.jar
+1337782828000 33525 211ffb697056079e6693316b2c9bb91e348ae9c4 /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/jackson-annotations-2.0.2.jar
+1311976450000 105799 d120bc4fa4f0ca8a8c92a1cc7093506f68e235a0 /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/httpclient-cache-4.1.2.jar
+1311976450000 105799 d120bc4fa4f0ca8a8c92a1cc7093506f68e235a0 /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/httpclient-cache-4.1.2.jar
+1337599093000 847121 396dee63d12d9ebc29b65bbc8cb4881525fa1da2 /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/jackson-databind-2.0.2.jar
+1337599093000 847121 396dee63d12d9ebc29b65bbc8cb4881525fa1da2 /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/jackson-databind-2.0.2.jar
+1311976470000 26890 ed8b5ee0167cb27dea55851259eb34b609f31df0 /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/httpmime-4.1.2.jar
+1311976470000 26890 ed8b5ee0167cb27dea55851259eb34b609f31df0 /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/httpmime-4.1.2.jar
+1310295744000 181200 39e30fb2ddfcf32b9dd663039ca6e847b698aa6f /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/httpcore-4.1.2.jar
+1310295744000 181200 39e30fb2ddfcf32b9dd663039ca6e847b698aa6f /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/httpcore-4.1.2.jar
+1295616366000 58160 4216af16d38465bbab0f3dff8efa14204f7a399a /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/commons-codec-1.4.jar
+1295616366000 58160 4216af16d38465bbab0f3dff8efa14204f7a399a /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/commons-codec-1.4.jar
+1312628418000 312866 b100d152a9e339079707266dad959e49e30ca09c /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/commons-lang3-3.0.1.jar
+1312628418000 312866 b100d152a9e339079707266dad959e49e30ca09c /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/commons-lang3-3.0.1.jar
+1311976468000 352254 c5bf45f7f35857d2c2dccfadf213ff047778a7cb /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/httpclient-4.1.2.jar
+1311976468000 352254 c5bf45f7f35857d2c2dccfadf213ff047778a7cb /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/httpclient-4.1.2.jar
+1295616364000 60686 5043bfebc3db072ed80fbd362e7caf00e885d8ae /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/commons-logging-1.1.1.jar
+1295616364000 60686 5043bfebc3db072ed80fbd362e7caf00e885d8ae /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/commons-logging-1.1.1.jar
+1344291292000 337562 27c24d26e4c5d57976e6926367985548678e913c /Users/Kevin/git/TopHatAndroidSDK/TopHatAndroidSDK/libs/android-support-v4.jar
+1343821639000 337562 27c24d26e4c5d57976e6926367985548678e913c /Users/Kevin/git/Android-Assassin/Android-Assassin/libs/android-support-v4.jar
