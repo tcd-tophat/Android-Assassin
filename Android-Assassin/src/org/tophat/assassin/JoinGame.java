@@ -17,5 +17,6 @@ public class JoinGame extends Activity {
 		Game g = b.getParcelable("game");
         
         ((TextView)findViewById(R.id.game_name_placeholder)).setText(g.getName()); 
+        ((TextView)findViewById(R.id.game_type_placeholder)).setText(g.getGameType().getName()); 
     }
 }

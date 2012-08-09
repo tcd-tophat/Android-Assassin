@@ -102,6 +102,7 @@ public class VanillaLogin extends Activity
 	     protected void onPostExecute(String error)
 	     {
 	    	 dialog.cancel();
+	    	 
 	    	 if (error == null)
 	    	 {
 				Intent menu = new Intent(vanilla, GameMenu.class);
