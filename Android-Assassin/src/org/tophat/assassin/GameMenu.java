@@ -70,6 +70,7 @@ public class GameMenu extends ListActivity {
     	GameMapper gm = new GameMapper(AssassinActivity.apic);
     	
     	this.games = new GameList();
+    	
 		try {
 			this.games = gm.getGameList();
 		} catch (Unauthorised e) {	

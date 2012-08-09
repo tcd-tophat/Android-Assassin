@@ -5,12 +5,14 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
 import org.tophat.android.exceptions.HttpException;
+import org.tophat.android.exceptions.NoInternetConnection;
 import org.tophat.android.exceptions.NotFound;
 import org.tophat.android.exceptions.Unauthorised;
 import org.tophat.android.model.ApiTokenMapper;
 import org.tophat.android.networking.ApiCommunicator;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -55,10 +57,21 @@ public class VanillaLogin extends Activity
 		new CommandProcessTask().execute(new String[]{((EditText)findViewById(R.id.email)).getText().toString(),((EditText)findViewById(R.id.password)).getText().toString()});
 	}
 	
-	 private class CommandProcessTask extends AsyncTask<String, Integer, String> 
-	 {
-	     protected String doInBackground(String... details) 
-	     {
+	private class CommandProcessTask extends AsyncTask<String, Integer, String> 
+	{
+		 
+		private ProgressDialog dialog;
+		
+		@Override    
+		protected void onPreExecute() 
+		{       
+		    super.onPreExecute();
+		    dialog = ProgressDialog.show(VanillaLogin.this, "", 
+                    "Loading. Please wait...", true);
+		}
+		    
+		protected String doInBackground(String... details) 
+		{
 			ApiTokenMapper atm = new ApiTokenMapper(AssassinActivity.apic);
 			 
 			try 
@@ -73,6 +86,10 @@ public class VanillaLogin extends Activity
 			{
 				return "The login details given were incorrect.";
 			} 
+			catch (NoInternetConnection e)
+			{
+				return "Please ensure you have an internet connection, and please try again.";
+			}
 			catch (HttpException e) 
 			{
 				e.printStackTrace();
@@ -80,10 +97,11 @@ public class VanillaLogin extends Activity
 			}
 			 
 			return null;
-	     }
+		 }
 
 	     protected void onPostExecute(String error)
 	     {
+	    	 dialog.cancel();
 	    	 if (error == null)
 	    	 {
 				Intent menu = new Intent(vanilla, GameMenu.class);
