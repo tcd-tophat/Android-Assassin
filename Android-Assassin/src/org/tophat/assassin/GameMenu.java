@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.tophat.android.exceptions.HttpException;
+import org.tophat.android.exceptions.NoInternetConnection;
+import org.tophat.android.exceptions.Unauthorised;
 import org.tophat.android.mapping.Game;
 import org.tophat.android.mapping.GameList;
+import org.tophat.android.model.ApiTokenMapper;
+import org.tophat.android.model.GameMapper;
 import org.tophat.assassin.components.ListItem;
 import org.tophat.assassin.components.QViewAdapter;
 
@@ -62,8 +67,18 @@ public class GameMenu extends ListActivity {
     
     public ArrayList<Map> getData()
     {
-    	//games = AssassinActivity.apic.games();
-    	GameList games = new GameList();
+    	GameMapper gm = new GameMapper(AssassinActivity.apic);
+    	
+    	this.games = new GameList();
+		try {
+			this.games = gm.getGameList();
+		} catch (Unauthorised e) {	
+			AssassinActivity.showNotification("You must authenticate.");
+		} catch (NoInternetConnection e) {	
+			AssassinActivity.showNotification("You currently do not have an internet connection.");
+		} catch (HttpException e) {	
+			AssassinActivity.showNotification("Error.");
+		}
     	
     	ArrayList<Map> data = new ArrayList<Map>();
     	
