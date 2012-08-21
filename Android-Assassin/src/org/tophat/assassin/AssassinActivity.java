@@ -46,6 +46,8 @@ public class AssassinActivity extends Activity
 	public void onResume()
 	{
 		super.onResume();
+		
+		constants = new Constants();
 	}
 	
 	/**
